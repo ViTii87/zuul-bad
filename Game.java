@@ -34,23 +34,31 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room atasco, cruce, parking, noTrafico, cortada, lenta, noSemaforo, obras, trabajo;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        atasco = new Room("en una calle atascada");
+        cruce = new Room("en un cruce bastante rapido");
+        parking = new Room("en un parking");
+        noTrafico = new Room("en una calle sin trafico");
+        cortada = new Room("en una calle cortada");
+        lenta = new Room("en una calle lenta");
+        noSemaforo = new Room("en una calle sin semaforos");
+        obras = new Room("en una calle en obras");
+        trabajo = new Room("en la calle del trabajo");
         
         // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        atasco.setExits(null, cruce, null, null);
+        cruce.setExits(lenta, noTrafico, parking, atasco);
+        parking.setExits(cruce, null, null, null);
+        noTrafico.setExits(noSemaforo, cortada, null, cruce);
+        cortada.setExits(null, null, null, noTrafico);
+        lenta.setExits(obras, null, cruce, null);
+        noSemaforo.setExits(trabajo, null, noTrafico, null);
+        obras.setExits(null, trabajo, lenta, null);
+        trabajo.setExits(null, null, noSemaforo, obras);
 
-        currentRoom = outside;  // start game outside
+        currentRoom = atasco;  // start game outside
     }
 
     /**
@@ -81,7 +89,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println("You are " + currentRoom.getDescription());
+        System.out.println("Estas " + currentRoom.getDescription());
         System.out.print("Exits: ");
         if(currentRoom.northExit != null) {
             System.out.print("north ");
@@ -176,7 +184,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println("You are " + currentRoom.getDescription());
+            System.out.println("Estas " + currentRoom.getDescription());
             System.out.print("Exits: ");
             if(currentRoom.northExit != null) {
                 System.out.print("north ");
