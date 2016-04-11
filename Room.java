@@ -61,7 +61,7 @@ public class Room
     {
         return description;
     }
-    
+
     /**
      * Metodo que devuelve la salida de la habitacion 
      */
@@ -75,9 +75,29 @@ public class Room
             exitRoom = southEastExit;
         if(direccion.equals("sur"))
             exitRoom = southExit;
-        if(direccion.equals("norte"))
+        if(direccion.equals("oeste"))
             exitRoom = westExit;
         return exitRoom;
     }
 
+    /**
+     * Return a description of the room's exits.
+     * For example: "Exits: north east west"
+     *
+     * @ return A description of the available exits.
+     */
+    public String getExitString(){
+        String direcciones = "";
+        if(northExit != null)
+            direcciones = direcciones + " norte";
+        if(eastExit != null)
+            direcciones = direcciones + " este";
+        if(southEastExit != null)
+            direcciones = direcciones + " sureste";
+        if(southExit != null)
+            direcciones = direcciones + " sur";
+        if(westExit != null)
+            direcciones = direcciones + " oeste";
+        return direcciones;
+    }
 }
