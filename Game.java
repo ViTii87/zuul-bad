@@ -48,15 +48,28 @@ public class Game
         trabajo = new Room("en la calle del trabajo");
 
         // initialise room exits
-        atasco.setExits(null, cruce, parking, null, null, null);
-        cruce.setExits(lenta, noTrafico, null,parking, atasco, null);
-        parking.setExits(cruce, null, null, null, null, atasco);
-        noTrafico.setExits(noSemaforo, cortada, null, null, cruce, null);
-        cortada.setExits(null, null, null, null, noTrafico, null);
-        lenta.setExits(obras, null, null, cruce, null, null);
-        noSemaforo.setExits(trabajo, null, null, noTrafico, null, null);
-        obras.setExits(null, trabajo, null, lenta, null, null);
-        trabajo.setExits(null, null, null, noSemaforo, obras, null);
+        atasco.setExit("este", cruce);
+        atasco.setExit("sureste", parking);
+        parking.setExit("norte", cruce);
+        parking.setExit("noroeste", atasco);
+        cruce.setExit("norte", lenta);
+        cruce.setExit("este", noTrafico);
+        cruce.setExit("sur", parking);
+        cruce.setExit("oeste", atasco);
+        noTrafico.setExit("norte", noSemaforo);
+        noTrafico.setExit("este", cortada);
+        noTrafico.setExit("oeste", cruce);
+        cortada.setExit("oeste", noTrafico);
+        lenta.setExit("norte", obras);
+        lenta.setExit("este", noSemaforo);
+        lenta.setExit("sur", cruce);
+        noSemaforo.setExit("norte", trabajo);
+        noSemaforo.setExit("sur", noTrafico);
+        noSemaforo.setExit("oeste", lenta);
+        obras.setExit("este", trabajo);
+        obras.setExit("sur", lenta);
+        trabajo.setExit("oeste", obras);
+        trabajo.setExit("sur", noSemaforo);
 
         currentRoom = atasco;  // start game outside
     }

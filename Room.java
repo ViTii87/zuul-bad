@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class Room 
 {
-    
+
     private String description;
     private HashMap<String, Room> salidas;
 
@@ -31,24 +31,6 @@ public class Room
     {
         this.description = description;
         salidas = new HashMap<String, Room>();
-    }
-
-    /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
-     */
-    public void setExits(Room north, Room east, Room southEast, Room south, Room west, Room northWest) 
-    {
-        salidas.put("norte", north);
-        salidas.put("este", east);
-        salidas.put("sur", south);
-        salidas.put("oeste", west);
-        salidas.put("sureste", southEast);
-        salidas.put("noroeste", northWest); 
     }
 
     /**
@@ -83,5 +65,14 @@ public class Room
                 direcciones = direcciones + e.getKey() + " ";
         }
         return direcciones;
+    }
+
+    /**
+     * Define an exit from this room.
+     * @param direction The direction of the exit.
+     * @param neighbor The room in the given direction.
+     */
+    public void setExit(String direction, Room neighbor){
+        salidas.put(direction, neighbor);
     }
 }
