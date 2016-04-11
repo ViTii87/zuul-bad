@@ -197,8 +197,7 @@ public class Game
      * Metodo que imprime la informacion de localizacion
      */
     private void printLocationInfo(){
-        System.out.println("Estas " + currentRoom.getDescription());
-        System.out.print("Salidas: " + currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
 }
