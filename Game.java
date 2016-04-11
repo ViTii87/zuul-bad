@@ -48,15 +48,15 @@ public class Game
         trabajo = new Room("en la calle del trabajo");
 
         // initialise room exits
-        atasco.setExits(null, cruce, null, null);
-        cruce.setExits(lenta, noTrafico, parking, atasco);
-        parking.setExits(cruce, null, null, null);
-        noTrafico.setExits(noSemaforo, cortada, null, cruce);
-        cortada.setExits(null, null, null, noTrafico);
-        lenta.setExits(obras, null, cruce, null);
-        noSemaforo.setExits(trabajo, null, noTrafico, null);
-        obras.setExits(null, trabajo, lenta, null);
-        trabajo.setExits(null, null, noSemaforo, obras);
+        atasco.setExits(null, cruce, parking, null, null);
+        cruce.setExits(lenta, noTrafico, null,parking, atasco);
+        parking.setExits(cruce, null, null, null, null);
+        noTrafico.setExits(noSemaforo, cortada, null, null, cruce);
+        cortada.setExits(null, null, null, null, noTrafico);
+        lenta.setExits(obras, null, null, cruce, null);
+        noSemaforo.setExits(trabajo, null, null, noTrafico, null);
+        obras.setExits(null, trabajo, null, lenta, null);
+        trabajo.setExits(null, null, null, noSemaforo, obras);
 
         currentRoom = atasco;  // start game outside
     }
@@ -159,6 +159,9 @@ public class Game
         if(direction.equals("este")) {
             nextRoom = currentRoom.eastExit;
         }
+        if(direction.equals("sureste")) {
+            nextRoom = currentRoom.southEastExit;
+        }
         if(direction.equals("sur")) {
             nextRoom = currentRoom.southExit;
         }
@@ -203,6 +206,9 @@ public class Game
         }
         if(currentRoom.eastExit != null) {
             System.out.print("este ");
+        }
+        if(currentRoom.southEastExit != null) {
+            System.out.print("sureste ");
         }
         if(currentRoom.southExit != null) {
             System.out.print("sur ");
