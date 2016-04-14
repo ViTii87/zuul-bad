@@ -20,6 +20,8 @@ public class Room
 
     private String description;
     private HashMap<String, Room> salidas;
+    private String descripcionItem;
+    private float kilogramosItem;
 
     /**
      * Create a room described "description". Initially, it has
@@ -27,10 +29,12 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description, String descripcionItem, float kilogramosItem) 
     {
         this.description = description;
         salidas = new HashMap<String, Room>();
+        this.descripcionItem = descripcionItem;
+        this.kilogramosItem = kilogramosItem;
     }
 
     /**
@@ -84,7 +88,9 @@ public class Room
      */
     public String getLongDescription(){
         String descripcion = "";
-        descripcion = "Estas " + description + "\nSalidas: " + getExitString();
+        descripcion = "Estas " + description + "\nSalidas: " + getExitString()
+            + "\nHay un item en esta calle: " + descripcionItem + 
+            "\nPeso del item: " + kilogramosItem + "Kg";
         return descripcion;
     }
 }
