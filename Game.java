@@ -37,15 +37,26 @@ public class Game
         Room atasco, cruce, parking, noTrafico, cortada, lenta, noSemaforo, obras, trabajo;
 
         // create the rooms
-        atasco = new Room("en una calle atascada", "Pistola", 1.2F);
-        cruce = new Room("en un cruce bastante rapido", "Helado", 0.07F);
-        parking = new Room("en un parking", "Bate de beisbol", 1.5F);
-        noTrafico = new Room("en una calle sin trafico", "Bidon de Gasolina", 15.0F);
-        cortada = new Room("en una calle cortada", "GPS, te hara falta!", 1.7F);
-        lenta = new Room("en una calle lenta", "Escopeta", 5.3F);
-        noSemaforo = new Room("en una calle sin semaforos", "Periodico", 0.5F);
-        obras = new Room("en una calle en obras", "Lanzacohetes", 13.0F);
-        trabajo = new Room("en la calle del trabajo", "Fajo de Billetes", 0.2F );
+        atasco = new Room("en una calle atascada");
+        cruce = new Room("en un cruce bastante rapido");
+        parking = new Room("en un parking");
+        noTrafico = new Room("en una calle sin trafico");
+        cortada = new Room("en una calle cortada");
+        lenta = new Room("en una calle lenta");
+        noSemaforo = new Room("en una calle sin semaforos");
+        obras = new Room("en una calle en obras");
+        trabajo = new Room("en la calle del trabajo");
+        
+        // añadimos items a las calles
+        atasco.addItem(new Item("Pistola", 1.2F));
+        cruce.addItem(new Item("Helado", 0.07F));
+        parking.addItem(new Item("Bate de beisbol", 1.5F));
+        noTrafico.addItem(new Item("Bidon de Gasolina", 15.0F));
+        cortada.addItem(new Item("GPS, te hara falta!", 1.7F));
+        lenta.addItem(new Item("Escopeta", 5.3F));
+        noSemaforo.addItem(new Item("Periodico", 0.5F));
+        obras.addItem(new Item("Lanzacohetes", 13.0F));
+        trabajo.addItem(new Item("Fajo de Billetes", 0.2F));
 
         // initialise room exits
         atasco.setExit("este", cruce);

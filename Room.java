@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.ArrayList;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -20,8 +21,7 @@ public class Room
 
     private String description;
     private HashMap<String, Room> salidas;
-    private String descripcionItem;
-    private float kilogramosItem;
+    private ArrayList<Item> listaItems;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,12 +29,11 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, String descripcionItem, float kilogramosItem) 
+    public Room(String description) 
     {
         this.description = description;
         salidas = new HashMap<String, Room>();
-        this.descripcionItem = descripcionItem;
-        this.kilogramosItem = kilogramosItem;
+        listaItems = new ArrayList<>();
     }
 
     /**
@@ -88,9 +87,23 @@ public class Room
      */
     public String getLongDescription(){
         String descripcion = "";
-        descripcion = "Estas " + description + "\nSalidas: " + getExitString()
-            + "\nHay un item en esta calle: " + descripcionItem + 
-            "\nPeso del item: " + kilogramosItem + "Kg";
+        descripcion = "Estas " + description + "\nSalidas: " + getExitString();
+        if(listaItems.size()!=0){
+            descripcion += "\n\nHay estos item en la calle: ";
+            for(Item itemCalle : listaItems){
+                descripcion += "\n" + itemCalle.getDescripcion() + ", " + "Peso: " + itemCalle.getPeso();
+            }
+        }
+        else{
+            descripcion += "No hay ningun item en esta calle.";
+        }
         return descripcion;
+    }
+    
+    /**
+     * Metodo que nos permite añadir un Item a la calle.
+     */
+    public void addItem(Item item){
+        listaItems.add(item);
     }
 }
