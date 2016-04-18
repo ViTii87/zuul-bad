@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room calleAnterior;
 
     /**
      * Create the game and initialise its internal map.
@@ -83,6 +84,7 @@ public class Game
         trabajo.setExit("sur", noSemaforo);
 
         currentRoom = atasco;  // start game outside
+        calleAnterior = null;
     }
 
     /**
@@ -147,6 +149,9 @@ public class Game
         else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
         }
+        else if (commandWord.equals("back")) {
+            goToLastRoom();
+        }
 
         return wantToQuit;
     }
@@ -187,6 +192,7 @@ public class Game
             System.out.println("No hay salida!");
         }
         else {
+            calleAnterior = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
             System.out.println();
@@ -215,5 +221,20 @@ public class Game
     private void printLocationInfo(){
         System.out.println(currentRoom.getLongDescription());
         System.out.println();
+    }
+    
+    /**
+     * Metodo que volvera a la calle anterior.
+     */
+    private void goToLastRoom(){
+        if(calleAnterior != null){
+            Room siguienteCalle = calleAnterior;
+            calleAnterior = null;
+            currentRoom = siguienteCalle;
+            printLocationInfo();
+        }
+        else{
+            System.out.println("No se puede volver!");
+        }
     }
 }
