@@ -14,12 +14,14 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2011.07.31
  */
+import java.util.Stack;
+
 
 public class Game 
 {
     private Parser parser;
     private Room currentRoom;
-    private Room calleAnterior;
+    private Stack<Room> listaCalles;
 
     /**
      * Create the game and initialise its internal map.
@@ -28,6 +30,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        listaCalles = new Stack<>();
     }
 
     /**
@@ -84,7 +87,6 @@ public class Game
         trabajo.setExit("sur", noSemaforo);
 
         currentRoom = atasco;  // start game outside
-        calleAnterior = null;
     }
 
     /**
@@ -192,7 +194,7 @@ public class Game
             System.out.println("No hay salida!");
         }
         else {
-            calleAnterior = currentRoom;
+            listaCalles.push(currentRoom);
             currentRoom = nextRoom;
             printLocationInfo();
             System.out.println();
@@ -227,10 +229,8 @@ public class Game
      * Metodo que volvera a la calle anterior.
      */
     private void goToLastRoom(){
-        if(calleAnterior != null){
-            Room siguienteCalle = calleAnterior;
-            calleAnterior = null;
-            currentRoom = siguienteCalle;
+        if(!listaCalles.empty()){
+            currentRoom = listaCalles.pop();
             printLocationInfo();
         }
         else{
