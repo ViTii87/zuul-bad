@@ -27,7 +27,7 @@ public class Game
      */
     public Game() 
     {
-        jugador = new Player();
+        jugador = new Player(5);
         createRooms();
         parser = new Parser();
     }
@@ -53,13 +53,13 @@ public class Game
         // añadimos items a las calles
         atasco.addItem(new Item("Pistola", 1.2F));
         cruce.addItem(new Item("Helado", 0.07F));
-        parking.addItem(new Item("Bate de beisbol", 1.5F));
-        noTrafico.addItem(new Item("Bidon de Gasolina", 15.0F));
-        cortada.addItem(new Item("GPS, te hara falta!", 1.7F));
+        parking.addItem(new Item("Bate", 1.5F));
+        noTrafico.addItem(new Item("Gasolina", 15.0F));
+        cortada.addItem(new Item("GPS", 1.7F));
         lenta.addItem(new Item("Escopeta", 5.3F));
         noSemaforo.addItem(new Item("Periodico", 0.5F));
         obras.addItem(new Item("Lanzacohetes", 13.0F));
-        trabajo.addItem(new Item("Fajo de Billetes", 0.2F));
+        trabajo.addItem(new Item("Billetes", 0.2F));
 
         // initialise room exits
         atasco.setExit("este", cruce);
@@ -153,6 +153,12 @@ public class Game
         else if (commandWord.equals("back")) {
             jugador.goToLastRoom();
         }
+        else if (commandWord.equals("take")) {
+            jugador.takeItem(command.getSecondWord());
+        }
+        else if (commandWord.equals("drop")) {
+            jugador.dropItem(command.getSecondWord());
+        }
 
         return wantToQuit;
     }
@@ -187,5 +193,6 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    
     
 }
