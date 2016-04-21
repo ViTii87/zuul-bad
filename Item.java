@@ -9,14 +9,16 @@ public class Item
 {
     private String descripcion;
     private float peso;
+    private boolean disponible;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String descripcion, float peso)
+    public Item(String descripcion, float peso, boolean disponible)
     {
         this.descripcion = descripcion;
         this.peso = peso;
+        this.disponible = disponible;
     }
     
     /**
@@ -31,6 +33,13 @@ public class Item
      */
     public float getPeso(){
         return peso;
+    }
+    
+    /**
+     * Metodo que devuelve si el objeto esta disponible
+     */
+    public boolean getDisponible(){
+        return disponible;
     }
 
 }

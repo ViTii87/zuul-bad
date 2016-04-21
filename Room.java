@@ -95,7 +95,7 @@ public class Room
             }
         }
         else{
-            descripcion += "No hay ningun item en esta calle.";
+            descripcion += "\nNo hay ningun item en esta calle.";
         }
         return descripcion;
     }

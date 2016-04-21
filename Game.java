@@ -51,15 +51,15 @@ public class Game
         trabajo = new Room("en la calle del trabajo");
         
         // añadimos items a las calles
-        atasco.addItem(new Item("Pistola", 1.2F));
-        cruce.addItem(new Item("Helado", 0.07F));
-        parking.addItem(new Item("Bate", 1.5F));
-        noTrafico.addItem(new Item("Gasolina", 15.0F));
-        cortada.addItem(new Item("GPS", 1.7F));
-        lenta.addItem(new Item("Escopeta", 5.3F));
-        noSemaforo.addItem(new Item("Periodico", 0.5F));
-        obras.addItem(new Item("Lanzacohetes", 13.0F));
-        trabajo.addItem(new Item("Billetes", 0.2F));
+        atasco.addItem(new Item("Pistola", 1.2F, true));
+        cruce.addItem(new Item("Helado", 0.07F, true));
+        parking.addItem(new Item("Bate", 1.5F, false));
+        noTrafico.addItem(new Item("Gasolina", 15.0F, false));
+        cortada.addItem(new Item("GPS", 1.7F, true));
+        lenta.addItem(new Item("Escopeta", 5.3F, true));
+        noSemaforo.addItem(new Item("Periodico", 0.5F, true));
+        obras.addItem(new Item("Lanzacohetes", 13.0F, false));
+        trabajo.addItem(new Item("Billetes", 0.2F, false));
 
         // initialise room exits
         atasco.setExit("este", cruce);
@@ -158,6 +158,9 @@ public class Game
         }
         else if (commandWord.equals("drop")) {
             jugador.dropItem(command.getSecondWord());
+        }
+        else if (commandWord.equals("items")) {
+            jugador.showItems();
         }
 
         return wantToQuit;

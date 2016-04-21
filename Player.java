@@ -90,7 +90,7 @@ public class Player
      */
     public void takeItem(String descripcion){
         Item item = calleActual.buscarItem(descripcion);
-        if(item != null && (pesoActual + item.getPeso()) < pesoMaximo){
+        if(item != null && (pesoActual + item.getPeso()) < pesoMaximo && item.getDisponible()){
             listaItems.add(item);
             pesoActual += item.getPeso();
             calleActual.eliminaItemCalle(item);
@@ -99,7 +99,7 @@ public class Player
             System.out.println("No se ha podido añadir el item");
         }
     }
-    
+
     /**
      * Metodo que soltara el item en la habitacion
      */
@@ -118,5 +118,23 @@ public class Player
         }
         if(!encontrado)
             System.out.println("No tengo nada que tirar");
+    }
+
+    /**
+     * Metodo que muestra el inventario del jugador
+     */
+    public void showItems(){
+        if(listaItems.size() != 0){
+            System.out.println("==============");
+            System.out.println("Tu inventario:");
+            System.out.println("==============");
+            for(int i = 0; i < listaItems.size(); i++){
+                System.out.println((i+1) + ". " + listaItems.get(i).getDescripcion()
+                    + ":   " + listaItems.get(i).getPeso() + "Kg");
+            }
+            System.out.println("");
+        }
+        else
+            System.out.println("No tienes items en el inventario.");
     }
 }
