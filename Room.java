@@ -95,7 +95,7 @@ public class Room
             }
         }
         else{
-            descripcion += "No hay ningun item en esta calle.";
+            descripcion += "\nNo hay ningun item en esta calle.";
         }
         return descripcion;
     }
@@ -105,5 +105,37 @@ public class Room
      */
     public void addItem(Item item){
         listaItems.add(item);
+    }
+    
+    /**
+     * Metodo que buscara un item en la habitacion
+     */
+    public Item buscarItem(String descripcion){
+        int i = 0;
+        boolean encontrado = false;
+        Item item = null;
+        while(i < listaItems.size() && !encontrado){
+            if(listaItems.get(i).getDescripcion().equals(descripcion)){
+                item = listaItems.get(i);
+                encontrado = true;
+            }
+            i++;
+        }
+        return item;
+    }
+    
+    /**
+     * Meotodo que elimina un item de una calle
+     */
+    public void eliminaItemCalle(Item item){
+        int i = 0;
+        boolean encontrado = false;
+        while(i < listaItems.size() && !encontrado){
+            if(listaItems.get(i).getDescripcion().equals(item.getDescripcion())){
+                listaItems.remove(listaItems.get(i));
+                encontrado = true;
+            }
+            i++;
+        }
     }
 }
