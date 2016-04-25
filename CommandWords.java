@@ -44,11 +44,7 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.size(); i++) {
-            return validCommands.containsKey(aString);
-        }
-        // if we get here, the string was not found in the commands
-        return false;
+        return validCommands.containsKey(aString);
     }
 
     /**
