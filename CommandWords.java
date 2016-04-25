@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -12,9 +15,7 @@
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private static final String[] validCommands = {
-        "go", "quit", "help", "look", "eat", "back", "take", "drop", "items"
-    };
+    private HashMap<String,Option> validCommands;
 
     /**
      * Constructor - initialise the command words.
@@ -22,6 +23,18 @@ public class CommandWords
     public CommandWords()
     {
         // nothing to do at the moment...
+        validCommands = new HashMap<>();
+        validCommands.put("go", Option.GO);
+        validCommands.put("quit", Option.QUIT);
+        validCommands.put("help", Option.HELP);
+        validCommands.put("look", Option.LOOK);
+        validCommands.put("eat", Option.EAT);
+        validCommands.put("back", Option.BACK);
+        validCommands.put("take", Option.TAKE);
+        validCommands.put("drop", Option.DROP);
+        validCommands.put("items", Option.ITEMS);
+        validCommands.put("uknown", Option.UKNOWN);
+
     }
 
     /**
@@ -31,22 +44,23 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
+        for(int i = 0; i < validCommands.size(); i++) {
+            return validCommands.containsKey(aString);
         }
         // if we get here, the string was not found in the commands
         return false;
     }
-    
-   /**
-   * Print all valid commands to System.out
-   */
-   public void showAll(){
-       String comandosDisponibles = "Lista de comandos disponibles: ";
-       for(int i = 0; i < validCommands.length; i++){
-           comandosDisponibles = comandosDisponibles + validCommands[i] + " ";
-       }
-       System.out.println(comandosDisponibles);
+
+    /**
+     * Print all valid commands to System.out
+     */
+    public void showAll(){
+        String comandosDisponibles = "Lista de comandos disponibles: ";
+        Iterator it = validCommands.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry e = (Map.Entry)it.next();
+            comandosDisponibles += e.getKey() + " ";
+        }
+        System.out.println(comandosDisponibles);
     }
 }
