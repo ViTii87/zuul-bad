@@ -16,7 +16,6 @@
  */
 import java.util.Stack;
 
-
 public class Game 
 {
     private Parser parser;
@@ -49,7 +48,7 @@ public class Game
         noSemaforo = new Room("en una calle sin semaforos");
         obras = new Room("en una calle en obras");
         trabajo = new Room("en la calle del trabajo");
-        
+
         // añadimos items a las calles
         atasco.addItem(new Item("Pistola", 1.2F, true));
         cruce.addItem(new Item("Helado", 0.07F, true));
@@ -128,41 +127,49 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
+        Option commandWord = command.getCommandWord();
+        switch(commandWord){
+            case HELP:
+            printHelp();
+            break;
 
-        if(command.isUnknown()) {
+            case GO:
+            jugador.goRoom(command);
+            break;
+            
+            case QUIT:
+            wantToQuit = quit(command);
+            break;
+            
+            case LOOK:
+            jugador.printLocationInfo();
+            break;
+            
+            case EAT:
+            System.out.println("You have eaten now and you are not hungry any more");
+            break;
+            
+            case BACK:
+            jugador.goToLastRoom();
+            break;
+            
+            case TAKE:
+            jugador.takeItem(command.getSecondWord());
+            break;
+            
+            case DROP:
+            jugador.dropItem(command.getSecondWord());
+            break;
+            
+            case ITEMS:
+            jugador.showItems();
+            break;
+
+            default:
             System.out.println("I don't know what you mean...");
             return false;
-        }
 
-        Option commandWord = command.getCommandWord();
-        if (commandWord == Option.HELP) {
-            printHelp();
         }
-        else if (commandWord == Option.GO) {
-            jugador.goRoom(command);
-        }
-        else if (commandWord == Option.QUIT) {
-            wantToQuit = quit(command);
-        }
-        else if (commandWord == Option.LOOK) {
-            jugador.printLocationInfo();
-        }
-        else if (commandWord == Option.EAT) {
-            System.out.println("You have eaten now and you are not hungry any more");
-        }
-        else if (commandWord == Option.BACK) {
-            jugador.goToLastRoom();
-        }
-        else if (commandWord == Option.TAKE) {
-            jugador.takeItem(command.getSecondWord());
-        }
-        else if (commandWord == Option.DROP) {
-            jugador.dropItem(command.getSecondWord());
-        }
-        else if (commandWord == Option.ITEMS) {
-            jugador.showItems();
-        }
-
         return wantToQuit;
     }
 
@@ -196,6 +203,5 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-    
-    
+
 }
