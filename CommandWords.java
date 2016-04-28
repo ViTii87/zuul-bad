@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Iterator;
+import java.util.ArrayList;
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -15,7 +13,7 @@ import java.util.Iterator;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private HashMap<String,Option> validCommands;
+    private ArrayList<Option> validCommands;
 
     /**
      * Constructor - initialise the command words.
@@ -23,18 +21,17 @@ public class CommandWords
     public CommandWords()
     {
         // nothing to do at the moment...
-        validCommands = new HashMap<>();
-        validCommands.put("andare", Option.GO);
-        validCommands.put("smettere", Option.QUIT);
-        validCommands.put("aiuto", Option.HELP);
-        validCommands.put("guarda", Option.LOOK);
-        validCommands.put("mangiare", Option.EAT);
-        validCommands.put("indietro", Option.BACK);
-        validCommands.put("prendere", Option.TAKE);
-        validCommands.put("farCadere", Option.DROP);
-        validCommands.put("elementi", Option.ITEMS);
-        validCommands.put("uknown", Option.UKNOWN);
-
+        validCommands = new ArrayList<>();
+        validCommands.add(Option.GO);
+        validCommands.add(Option.QUIT);
+        validCommands.add(Option.HELP);
+        validCommands.add(Option.LOOK);
+        validCommands.add(Option.EAT);
+        validCommands.add(Option.BACK);
+        validCommands.add(Option.TAKE);
+        validCommands.add(Option.DROP);
+        validCommands.add(Option.ITEMS);
+        validCommands.add(Option.UKNOWN);
     }
 
     /**
@@ -44,7 +41,15 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        return validCommands.containsKey(aString);
+        boolean encontrado = false;
+        int i = 0;
+        while(i < validCommands.size() && !encontrado){
+            if(validCommands.get(i).getCommand().equals(aString)){
+                encontrado = true;
+            }
+            i++;
+        }
+        return encontrado;
     }
 
     /**
@@ -52,10 +57,8 @@ public class CommandWords
      */
     public void showAll(){
         String comandosDisponibles = "Lista de comandos disponibles: ";
-        Iterator it = validCommands.entrySet().iterator();
-        while(it.hasNext()){
-            Map.Entry e = (Map.Entry)it.next();
-            comandosDisponibles += e.getKey() + " ";
+        for(Option comando: validCommands){
+            comandosDisponibles += comando.getCommand() + " ";
         }
         System.out.println(comandosDisponibles);
     }
@@ -68,10 +71,16 @@ public class CommandWords
      */
     public Option getCommandWord(String commandWord){
         Option opt = null;
-        if(isCommand(commandWord)){
-            opt = validCommands.get(commandWord);
+        int i = 0;
+        boolean encontrado = false;
+        while(i < validCommands.size() && !encontrado){
+            if(validCommands.get(i).getCommand().equals(commandWord)){
+                encontrado = true;
+                opt = validCommands.get(i);
+            }
+            i++;
         }
-        else{
+        if(!encontrado) {
             opt = Option.UKNOWN;
         }
         return opt;
