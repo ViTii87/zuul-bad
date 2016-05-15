@@ -23,6 +23,7 @@ public class Room
     private HashMap<String, Room> salidas;
     private ArrayList<Item> listaItems;
     private boolean dobleIntento;
+    private boolean especial;
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,12 +31,13 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, boolean dobleIntento) 
+    public Room(String description, boolean dobleIntento, boolean especial) 
     {
         this.description = description;
         salidas = new HashMap<String, Room>();
         listaItems = new ArrayList<>();
         this.dobleIntento = dobleIntento;
+        this.especial = especial;
     }
 
     /**
@@ -53,6 +55,13 @@ public class Room
         return dobleIntento;
     }
 
+    /**
+     * Metodo que devuelve true si la calle posee un personaje espeacial
+     */
+    public boolean getEspecial(){
+        return especial;
+    }
+    
     /**
      * Metodo que devuelve la salida de la habitacion 
      */
@@ -97,6 +106,10 @@ public class Room
     public String getLongDescription(){
         String descripcion = "";
         descripcion = "Estas " + description + "\nSalidas: " + getExitString();
+        if(especial)
+            descripcion += "\n\n****MIRA!!!****"
+             + "\nHay un tio de ojos saltones aqui... quiere un periodico y te ayudara" + 
+             "\na teletransportarte a un sitio mas cercano... o no...";
         if(listaItems.size()!=0){
             descripcion += "\n\nHay estos item en la calle: ";
             for(Item itemCalle : listaItems){

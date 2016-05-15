@@ -39,15 +39,15 @@ public class Game
         Room atasco, cruce, parking, noTrafico, cortada, lenta, noSemaforo, obras, trabajo;
 
         // create the rooms
-        atasco = new Room("en una calle atascada",false);
-        cruce = new Room("en un cruce bastante rapido",false);
-        parking = new Room("en un parking",false);
-        noTrafico = new Room("en una calle sin trafico",false);
-        cortada = new Room("en una calle cortada",true);
-        lenta = new Room("en una calle lenta", true);
-        noSemaforo = new Room("en una calle sin semaforos",false);
-        obras = new Room("en una calle en obras",true);
-        trabajo = new Room("en la calle del trabajo",false);
+        atasco = new Room("en una calle atascada", false, false);
+        cruce = new Room("en un cruce bastante rapido", false, false);
+        parking = new Room("en un parking", false, false);
+        noTrafico = new Room("en una calle sin trafico", false, false);
+        cortada = new Room("en una calle cortada", true, true);
+        lenta = new Room("en una calle lenta", true, false);
+        noSemaforo = new Room("en una calle sin semaforos", false, false);
+        obras = new Room("en una calle en obras", true, true);
+        trabajo = new Room("en la calle del trabajo", false, false);
 
         // añadimos items a las calles
         atasco.addItem(new Item("Pistola", 1.2F, true));
