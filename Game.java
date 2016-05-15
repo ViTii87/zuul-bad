@@ -39,15 +39,15 @@ public class Game
         Room atasco, cruce, parking, noTrafico, cortada, lenta, noSemaforo, obras, trabajo;
 
         // create the rooms
-        atasco = new Room("en una calle atascada");
-        cruce = new Room("en un cruce bastante rapido");
-        parking = new Room("en un parking");
-        noTrafico = new Room("en una calle sin trafico");
-        cortada = new Room("en una calle cortada");
-        lenta = new Room("en una calle lenta");
-        noSemaforo = new Room("en una calle sin semaforos");
-        obras = new Room("en una calle en obras");
-        trabajo = new Room("en la calle del trabajo");
+        atasco = new Room("en una calle atascada",false);
+        cruce = new Room("en un cruce bastante rapido",false);
+        parking = new Room("en un parking",false);
+        noTrafico = new Room("en una calle sin trafico",false);
+        cortada = new Room("en una calle cortada",true);
+        lenta = new Room("en una calle lenta", true);
+        noSemaforo = new Room("en una calle sin semaforos",false);
+        obras = new Room("en una calle en obras",true);
+        trabajo = new Room("en la calle del trabajo",false);
 
         // añadimos items a las calles
         atasco.addItem(new Item("Pistola", 1.2F, true));
@@ -125,7 +125,7 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-        if(jugador.getNumIntentos() != 1){
+        if(jugador.getNumIntentos() > 0){
             Option commandWord = command.getCommandWord();
             switch(commandWord){
                 case HELP:
