@@ -22,6 +22,7 @@ public class Room
     private String description;
     private HashMap<String, Room> salidas;
     private ArrayList<Item> listaItems;
+    private boolean dobleIntento;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,11 +30,12 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description, boolean dobleIntento) 
     {
         this.description = description;
         salidas = new HashMap<String, Room>();
         listaItems = new ArrayList<>();
+        this.dobleIntento = dobleIntento;
     }
 
     /**
@@ -42,6 +44,13 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+    
+    /**
+     * Metodo que si devuelve true es que es una calle que restara 2 intentos al jugador.
+     */
+    public boolean getDobleIntento(){
+        return dobleIntento;
     }
 
     /**
