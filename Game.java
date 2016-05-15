@@ -93,10 +93,8 @@ public class Game
     public void play() 
     {            
         printWelcome();
-
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -127,49 +125,57 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
-        Option commandWord = command.getCommandWord();
-        switch(commandWord){
-            case HELP:
-            printHelp();
-            break;
+        if(jugador.getNumIntentos() != 1){
+            Option commandWord = command.getCommandWord();
+            switch(commandWord){
+                case HELP:
+                printHelp();
+                break;
 
-            case GO:
-            jugador.goRoom(command);
-            break;
-            
-            case QUIT:
-            wantToQuit = quit(command);
-            break;
-            
-            case LOOK:
-            jugador.printLocationInfo();
-            break;
-            
-            case EAT:
-            System.out.println("You have eaten now and you are not hungry any more");
-            break;
-            
-            case BACK:
-            jugador.goToLastRoom();
-            break;
-            
-            case TAKE:
-            jugador.takeItem(command.getSecondWord());
-            break;
-            
-            case DROP:
-            jugador.dropItem(command.getSecondWord());
-            break;
-            
-            case ITEMS:
-            jugador.showItems();
-            break;
+                case GO:
+                jugador.goRoom(command);
+                break;
 
-            default:
-            System.out.println("I don't know what you mean...");
-            return false;
+                case QUIT:
+                wantToQuit = quit(command);
+                break;
 
+                case LOOK:
+                jugador.printLocationInfo();
+                break;
+
+                case EAT:
+                System.out.println("You have eaten now and you are not hungry any more");
+                break;
+
+                case BACK:
+                jugador.goToLastRoom();
+                break;
+
+                case TAKE:
+                jugador.takeItem(command.getSecondWord());
+                break;
+
+                case DROP:
+                jugador.dropItem(command.getSecondWord());
+                break;
+
+                case ITEMS:
+                jugador.showItems();
+                break;
+
+                default:
+                System.out.println("I don't know what you mean...");
+                return false;
+
+            }
         }
+        else{
+            System.out.println();
+            System.out.println("Intentos agotados. GAMEOVER!");
+            wantToQuit = true;
+        }
+
         return wantToQuit;
     }
 
@@ -203,5 +209,4 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-
 }

@@ -13,6 +13,7 @@ public class Player
     private ArrayList<Item> listaItems;
     private float pesoMaximo;
     private float pesoActual;
+    private int numIntentos;
 
     /**
      * Constructor for objects of class Player
@@ -24,6 +25,7 @@ public class Player
         listaItems = new ArrayList<>();
         this.pesoMaximo = pesoMaximo;
         pesoActual = 0;
+        numIntentos = 10;
     }
 
     /**
@@ -42,13 +44,23 @@ public class Player
     public void printLocationInfo(){
         System.out.println(calleActual.getLongDescription());
         System.out.println();
+        printNumIntentos();
     }
 
+    /**
+     * Metodo que imprime el numero de intentos restantes.
+     */
+    public void printNumIntentos(){
+        System.out.println("Intentos restantes: " + numIntentos);
+        System.out.println();
+    }
+    
     /**
      * Metodo que volvera a la calle anterior.
      */
     public void goToLastRoom(){
         if(!listaCalles.empty()){
+            numIntentos --;
             calleActual = listaCalles.pop();
             printLocationInfo();
         }
@@ -80,6 +92,7 @@ public class Player
         else {
             listaCalles.push(calleActual);
             calleActual = nextRoom;
+            numIntentos--;
             printLocationInfo();
             System.out.println();
         }
@@ -136,5 +149,12 @@ public class Player
         }
         else
             System.out.println("No tienes items en el inventario.");
+    }
+    
+    /**
+     * Metodo que devuelve el numero de intentos.
+     */
+    public int getNumIntentos(){
+        return numIntentos;
     }
 }
