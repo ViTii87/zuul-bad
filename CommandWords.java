@@ -32,6 +32,7 @@ public class CommandWords
         validCommands.add(Option.DROP);
         validCommands.add(Option.ITEMS);
         validCommands.add(Option.UKNOWN);
+         validCommands.add(Option.DAR);
     }
 
     /**

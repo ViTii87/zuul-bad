@@ -24,6 +24,7 @@ public class Room
     private ArrayList<Item> listaItems;
     private boolean dobleIntento;
     private boolean especial;
+    private int id;
 
     /**
      * Create a room described "description". Initially, it has
@@ -108,7 +109,7 @@ public class Room
         descripcion = "Estas " + description + "\nSalidas: " + getExitString();
         if(especial)
             descripcion += "\n\n****MIRA!!!****"
-             + "\nHay un tio de ojos saltones aqui... quiere un periodico y te ayudara" + 
+             + "\nHay un tio de ojos saltones aqui... quiere un HELADO y te ayudara" + 
              "\na teletransportarte a un sitio mas cercano... o no...";
         if(listaItems.size()!=0){
             descripcion += "\n\nHay estos item en la calle: ";

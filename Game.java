@@ -15,11 +15,15 @@
  * @version 2011.07.31
  */
 import java.util.Stack;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Game 
 {
     private Parser parser;
     private Player jugador;
+    private static ArrayList<Room> calles;
+    private static final int[] ESPECIALES = {8, 7, 4};
 
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +31,7 @@ public class Game
     public Game() 
     {
         jugador = new Player(5);
+        calles = new ArrayList<>();
         createRooms();
         parser = new Parser();
     }
@@ -37,7 +42,6 @@ public class Game
     private void createRooms()
     {
         Room atasco, cruce, parking, noTrafico, cortada, lenta, noSemaforo, obras, trabajo;
-
         // create the rooms
         atasco = new Room("en una calle atascada", false, false);
         cruce = new Room("en un cruce bastante rapido", false, false);
@@ -48,6 +52,17 @@ public class Game
         noSemaforo = new Room("en una calle sin semaforos", false, false);
         obras = new Room("en una calle en obras", true, true);
         trabajo = new Room("en la calle del trabajo", false, false);
+        
+        calles.add(atasco);
+        calles.add(cruce);
+        calles.add(parking);
+        calles.add(noTrafico);
+        calles.add(cortada);
+        calles.add(lenta);
+        calles.add(noSemaforo);
+        calles.add(obras);
+        calles.add(trabajo);
+        
 
         // añadimos items a las calles
         atasco.addItem(new Item("Pistola", 1.2F, true));
@@ -163,6 +178,10 @@ public class Game
                 case ITEMS:
                 jugador.showItems();
                 break;
+                
+                case DAR:
+                jugador.darItem(command.getSecondWord());
+                break;
 
                 default:
                 System.out.println("I don't know what you mean...");
@@ -208,5 +227,17 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+    
+    /**
+     * Metodo para elegir la habitacion aleatoriamente
+     */
+    public static Room randomRoom(){
+        Random rnd = new Random();
+        int alea = 8;
+        while(alea == ESPECIALES[0] || alea == ESPECIALES[1] || alea == ESPECIALES[2]){
+            alea = rnd.nextInt(calles.size());
+        }
+        return calles.get(alea);
     }
 }

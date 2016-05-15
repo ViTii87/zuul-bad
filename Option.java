@@ -16,7 +16,8 @@ public enum Option{
     TAKE("take"), 
     DROP("drop"), 
     ITEMS("items"), 
-    UKNOWN("uknown");
+    UKNOWN("uknown"),
+    DAR("dar");
     
     private String command;
     

@@ -170,4 +170,34 @@ public class Player
     public int getNumIntentos(){
         return numIntentos;
     }
+
+    /**
+     * Metodo que permite dar un item a un tio de ojos saltones, acto seguido escogemos una calle aleatoria.
+     */
+    public void darItem(String description){
+        if(listaItems.size() == 0)
+            System.out.println("No tienes items en el inventario.");
+        if(calleActual.getEspecial()){
+            int i = 0;
+            boolean encontrado = false;
+            while(i < listaItems.size() && !encontrado){
+                if(listaItems.get(i).getDescripcion().equals(description) && description.equals("Helado")){
+                    pesoActual -= listaItems.get(i).getPeso();
+                    listaItems.remove(listaItems.get(i));
+                    encontrado = true;
+                    System.out.println("Le has dado un item al tio... Zuuuuuuum!!");
+                    calleActual = null;
+                    listaCalles = new Stack<>();
+                    numIntentos--;
+                    fijarCalle(Game.randomRoom());
+                    printLocationInfo();
+                }
+                else
+                    System.out.println("No tienes el item requerido");
+                i++;
+            }
+        }
+        else
+            System.out.println("No tengo a nadie a quien darle nada");
+    }
 }
