@@ -177,9 +177,9 @@ public class Player
     public void darItem(String description){
         if(listaItems.size() == 0)
             System.out.println("No tienes items en el inventario.");
+        int i = 0;
+        boolean encontrado = false;
         if(calleActual.getEspecial()){
-            int i = 0;
-            boolean encontrado = false;
             while(i < listaItems.size() && !encontrado){
                 if(listaItems.get(i).getDescripcion().equals(description) && description.equals("Helado")){
                     pesoActual -= listaItems.get(i).getPeso();
@@ -192,12 +192,13 @@ public class Player
                     fijarCalle(Game.randomRoom());
                     printLocationInfo();
                 }
-                else
-                    System.out.println("No tienes el item requerido");
+                
                 i++;
             }
         }
         else
             System.out.println("No tengo a nadie a quien darle nada");
+        if(!encontrado)
+                    System.out.println("No tienes el item requerido");
     }
 }
